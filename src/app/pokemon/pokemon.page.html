@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title style="text-transform: capitalize">{{pokemon.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="width: 100%; height: 100%; display: flex">
+  <ion-card
+    style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 79vh;
+      margin: 20px;
+      position: relative;
+      background-color: rgb(235, 235, 235);
+    "
+  >
+    <ng-container *ngIf="prevId!==-1">
+      <div
+        (click)="prev()"
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: absolute;
+          left: -75px;
+          filter: opacity(50%) brightness(0);
+        "
+      >
+        <img
+          style="height: 200px; width: 200px"
+          [src]="prevPokemon.sprites?.front_default"
+          alt=""
+        />
+        <span style="color: black; text-transform: capitalize"
+          >{{prevPokemon.name}}</span
+        >
+        <ion-icon style="color: black" name="arrow-back"></ion-icon>
+      </div>
+    </ng-container>
+    <div style="display: flex; flex-direction: column; align-items: center">
+      <span
+        style="
+          font-size: 35px;
+          font-weight: bold;
+          color: rgb(194, 194, 23);
+          -webkit-text-stroke-width: 2px;
+          text-transform: capitalize;
+          -webkit-text-stroke-color: rgb(12, 83, 116);
+        "
+        >{{pokemon.name}}</span
+      >
+      <p>ID: #{{ pokemon.id }}</p>
+      <img
+        style="height: 250px; width: 250px"
+        [src]="pokemon.sprites?.other.home.front_default"
+        alt=""
+      />
+      <div style="width: 100%; display: flex; justify-content: space-around">
+        <span>{{pokemon.height}} feet</span>
+        <span>{{pokemon.weight}} pounds</span>
+      </div>
+      <div
+        style="display: flex; align-items: center"
+        *ngFor="let type of pokemon.types"
+      >
+        <div
+          style="display: flex; align-items: center"
+          *ngFor="let item of types"
+        >
+          <div *ngIf="type?.type?.name===item.name">
+            <img
+              style="width: 30px; height: 30px; margin-right: 10px"
+              src="{{item.url}}"
+              alt=""
+            />
+          </div>
+        </div>
+        <span style="font-size: larger">{{type?.type?.name}}</span>
+      </div>
+    </div>
+    <div
+      (click)="next()"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 10;
+        position: absolute;
+        right: -75px;
+        filter: opacity(50%) brightness(0);
+      "
+    >
+      <img
+        style="height: 200px; width: 200px"
+        [src]="nextPokemon.sprites?.front_default"
+        alt=""
+      />
+      <span style="color: black; text-transform: capitalize"
+        >{{nextPokemon.name}}</span
+      >
+      <ion-icon style="color: black" name="arrow-forward"></ion-icon>
+    </div>
+    <!-- <app-bar-chart></app-bar-chart> -->
+  </ion-card>
+</ion-content>
